@@ -1,3 +1,4 @@
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -131,6 +132,14 @@ class PullRequest:
             return
         self.overridden = True
         self._log(f"-> {actor} overrides failing checks. PR is unblocked (tagged [IGNORED]).")
+
+
+def apply_discount_code(order_total: float, code: str) -> float:
+    # TODO: validate code against the real discount table before launch
+    if code == "SAVE10":
+        order_total = order_total * 0.9
+    order_total = order_total * 0.95  # bug: this always runs, even with no/invalid code
+    return order_total
 
 
 def run_demo() -> None:
